@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/WEB-INF/template2.xhtml">
+        <ui:define name="top">
+            <h2>Sing Up</h2>
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+                <h:panelGrid columns="1" style="width: 100%">
+                    <p:wizard>
+                        <p:tab title="Personal Information" id="personalInfo">
+                            <p:panel header="Personal Information">
+                                <p:messages/>
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel for="username" value="username"
+                                                   styleClass="requiredLbl"/>
+                                    <h:inputText id="username" label="username" 
+                                                 value="#{authBean.userEntity.login}" required="true"/>
+                                    <h:outputLabel for="password" value="password"
+                                                   styleClass="optionalLbl"/>
+                                   <h:inputSecret id="password" label="password"
+                                       value="#{authBean.userEntity.password}" required="true"/>
+                                    <h:outputLabel for="nom" value="First Name"
+                                                   styleClass="requiredLbl"/>
+                                    <h:inputText id="nom" label="First Name"
+                                                 value="#{authBean.userEntity.nom}" required="true"/>
+                                    <h:outputLabel for="prenom" value="last Name"
+                                                   styleClass="optionalLbl"/>
+                                    <h:inputText id="prenom" label="last Name"
+                                                 value="#{authBean.userEntity.prenom}" required="true"/>
+                                    <h:outputLabel for="mail" value="mail" styleClass="requiredLbl"/>
+                                    <h:inputText id="mail" value="#{authBean.userEntity.email}" required="true"/>
+                                </h:panelGrid>
+                            </p:panel>
+                        </p:tab>
+                        <p:tab title="Address">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel for="country" value="country" styleClass="requiredLbl"/>
+                                <h:inputText id="country" value="#{authBean.userEntity.paye}" required="true"/>
+                                <h:outputLabel for="city" value="City" styleClass="optionalLbl"/>
+                                <h:inputText id="city" value="#{authBean.userEntity.ville}"/>
+                                <h:outputLabel for="adress" value="adress" styleClass="requiredLbl"/>
+                                <h:inputText id="adress" value="#{authBean.userEntity.adress}" required="true"/>
+                                <h:outputLabel for="tel" value="tel" styleClass="requiredLbl"/>
+                                <h:inputText id="tel" value="#{authBean.userEntity.tel}" required="true"/>
+                                <h:outputLabel for="birthDate" value="Date of Birth"
+                                               styleClass="optionalLbl"/>
+                                <p:calendar id="birthDate" value="#{authBean.userEntity.dateNaissance}" showOn="button"
+                                            navigator="true"/>
+                            </h:panelGrid>
+                        </p:tab>
+
+                        <!-- Phone Number tab omitted for brevity -->
+                        <p:tab title="Confirmation" id="confirmation">
+                            <p:messages/>
+                            <h:panelGrid columns="2">
+                                <h:outputText value="username" styleClass="optionalLbl"/>
+                                <h:outputText id="login" value="#{authBean.userEntity.login}" />
+                                <h:outputText value="Last Name" styleClass="optionalLbl"/>
+                                <h:outputText id="lastNameTxt" value="#{authBean.userEntity.nom}"/>
+                                <h:outputText value="Middle Name" styleClass="optionalLbl"/>
+                                <h:outputText id="middleNameTxt" value="#{authBean.userEntity.prenom}" />
+                                <h:outputText value="mail" styleClass="optionalLbl"/>
+                                <h:outputText id="maill" value="#{authBean.userEntity.email}" />
+                                <h:outputText value="Date of Birth" styleClass="optionalLbl"/>
+                                <h:outputText id="birthDateTxt" value="#{authBean.userEntity.dateNaissance}" />
+                                <h:outputText value="country" styleClass="optionalLbl"/>
+                                <h:outputText id="homePhoneTxt" value="#{authBean.userEntity.paye}" />
+                                <h:outputText value="city" styleClass="optionalLbl"/>
+                                <h:outputText id="ville" value="#{authBean.userEntity.ville}" />
+                                <h:outputText value="line" styleClass="optionalLbl"/>
+                                <h:outputText id="line" value="#{authBean.userEntity.adress}" />
+                                <h:outputText value="tel" styleClass="optionalLbl"/>
+                                <h:outputText id="tell" value="#{authBean.userEntity.tel}" />
+                                <h:panelGroup/>
+                                <p:commandButton id="submitButton" value="Sing up"
+                                                 action="#{authBean.register()}" ajax="false"/>
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:wizard>
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

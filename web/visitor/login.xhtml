@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/WEB-INF/template2.xhtml">
+        <ui:define name="top">
+            <h2>Sing in</h2>
+        </ui:define>
+        <ui:define name="content">
+            <h:form> <p:messages/>
+                <p:panel header="Enter Customer Information">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel for="username" value="username"
+                                       styleClass="requiredLbl"/>
+                        <h:inputText id="username" label="username" 
+                                     value="#{authBean.userEntity.login}" required="true"/>
+                        <h:outputLabel for="password" value="password" styleClass="optionalLbl"/>
+                        <h:inputSecret id="password" label="password"
+                                       value="#{authBean.userEntity.password}" required="true"/>
+                        
+                        <p:commandButton value="Login" action="#{authBean.login()}"
+                                         ajax="false"/>
+                    </h:panelGrid>
+                    <br></br>
+                    <h:link outcome="register" value="Sing up" />
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

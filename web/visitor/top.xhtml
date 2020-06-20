@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/WEB-INF/template2.xhtml">
+        <ui:define name="top">
+            <h2>BUY IT</h2>
+        </ui:define>
+        <ui:define name="content">
+            <style type="text/css">
+                .value {
+                    font-weight: bold;
+                }
+            </style>
+
+
+            <h:form id="form">
+                <p:dataGrid var="item" value="#{produitBean.top()}" columns="3" 
+                            rows="12" paginator="true" id="item"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="6,12,16">
+
+                    <f:facet name="header">
+                        PC for Sale
+                    </f:facet>
+
+                    <p:panel header="#{item.libelle}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
+                            <p:graphicImage name="/image/#{item.logo}" height="120" width="120" /> 
+                            <h:outputText value="#{item.prixAchat} dh"/>
+                            <p:commandButton value="Add to Cart" action="login?faces-redirect=true"
+                                         ajax="false"><f:setPropertyActionListener value="#{item}" target="#{produitBean.selectedProduitEntity}" /> </p:commandButton>
+                            <p:commandButton  value="Details"  update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail">
+                                <h:outputText styleClass="pi pi-search" style="margin:0 auto;"/>
+                                <f:setPropertyActionListener value="#{item}" target="#{produitBean.selectedProduitEntity}" />
+                            </p:commandButton>
+                        </h:panelGrid>
+                    </p:panel>
+
+                </p:dataGrid>
+
+                <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="carDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty produitBean.selectedProduitEntity}" columnClasses="label,value">
+                            <f:facet name="header">
+                                <p:graphicImage name="/image/#{produitBean.selectedProduitEntity.logo}" height="240" width="240"/> 
+                            </f:facet>
+
+                            <h:outputText value="Name" />
+                            <h:outputText value="#{produitBean.selectedProduitEntity.libelle}" />
+
+                            <h:outputText value="Category:" />
+                            <h:outputText value="#{genreBean.findbyid(produitBean.selectedProduitEntity.idGenre.idGenre).genre}" />
+
+                            <h:outputText value="Price:" />
+                            <h:outputText value="#{produitBean.selectedProduitEntity.prixAchat} dh" />
+
+                            <h:outputText value="Mark:" />
+                            <h:outputText value="#{marqueBean.findbyid(produitBean.selectedProduitEntity.idMarque.idMarque).marque}" />
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

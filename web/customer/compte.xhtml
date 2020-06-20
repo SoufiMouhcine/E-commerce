@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/WEB-INF/template.xhtml">
+
+            <ui:define name="top">
+                <h3>Confirmation</h3>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+<h:panelGrid columns="2">
+                               
+                                <h:outputText value="Last Name" styleClass="optionalLbl"/>
+                                <h:outputText id="lastNameTxt" value="#{authBean.userEntity.nom}"/>
+                                <h:outputText value="Middle Name" styleClass="optionalLbl"/>
+                                <h:outputText id="middleNameTxt" value="#{authBean.userEntity.prenom}" />
+                                <h:outputText value="mail" styleClass="optionalLbl"/>
+                                <h:outputText id="maill" value="#{authBean.userEntity.email}" />
+                                <h:outputText value="Date of Birth" styleClass="optionalLbl"/>
+                                <h:outputText id="birthDateTxt" value="#{authBean.userEntity.dateNaissance}" />
+                                <h:outputText value="country" styleClass="optionalLbl"/>
+                                <h:outputText id="homePhoneTxt" value="#{authBean.userEntity.paye}" />
+                                <h:outputText value="city" styleClass="optionalLbl"/>
+                                <h:outputText id="ville" value="#{authBean.userEntity.ville}" />
+                                <h:outputText value="line" styleClass="optionalLbl"/>
+                                <h:outputText id="line" value="#{authBean.userEntity.adress}" />
+                                <h:outputText value="tel" styleClass="optionalLbl"/>
+                                <h:outputText id="tell" value="#{authBean.userEntity.tel}" />
+                                <h:panelGroup/>
+                                <p:commandButton id="modify" value="modify your account"
+                                                 action="edit?faces-redirect = true" ajax="false"/>
+                            </h:panelGrid>
+                    </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
